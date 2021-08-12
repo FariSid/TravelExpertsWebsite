@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  title Home
+
+  .banner
+    .card.bg-dark.text-white
+      img#mybanner.card-img(src='/images/marketing.png' alt='Travel Experts')
+      .card-img-overlay
+
+        h5.card-title Bringing joy from every journey!
+
+
+  #mypackage.container.col-12
+    br
+    br
+    h3 Browse by Vacation Destination 
+      br
+      .card-group.gap-3
+        each pack in packageList
+          .card.mt-5            
+            img.card-img-top(src=pack.imagpath alt='canada')
+            .card-body.text-center
+              h4.card-title.text-center= pack.PkgName
+              h4.card-text.text-center
+                | Price: $#{pack.PkgBasePrice}
+                br
+              a.btn.btn-primary(href='/package-single/'+ pack.PackageId)  Details

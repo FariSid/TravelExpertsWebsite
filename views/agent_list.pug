@@ -1,0 +1,55 @@
+//- Written by George(Xiaoyin Zhou)
+
+extends layout
+
+block content 
+  title Agent List
+  hr
+  br
+  br
+  .container
+        br
+        br
+        br
+        br
+        br  
+        a.btn.btn-success(href='/admin/add') Add a new Agent 
+      
+        table.table.table-striped
+        
+            thead
+              tr
+                th AgentId  
+                th First Name
+                th Last Name 
+                th Business Phone 
+                th Email
+                th Position 
+                th AgencyId
+                th Edit 
+                th Delete
+
+                each agt in agents        
+                    tbody
+                    tr 
+                      td= agt.AgentId
+                      td= agt.AgtFirstName
+                      td= agt.AgtLastName
+                      td= agt.AgtBusPhone
+                      td= agt.AgtEmail
+                      td= agt.AgtPosition
+                      td= agt.AgencyId
+                      td 
+                        a.btn.btn-primary(href='/admin/edit/'+agt._id) Edit
+                      td 
+                        a.btn.btn-warning(href='/admin/delete/'+agt._id) delete    
+
+
+
+
+
+
+
+
+                 
+

@@ -1,0 +1,63 @@
+// Written by Raulito Laconsay
+
+extends layout
+
+block content
+
+
+
+    #mypackagebuy.container.col-12
+      h3= packageList .PkgName
+        .card-group.gap-3
+          if packageList
+            .card.mt-5
+              
+                img.card-img-top.mx-auto(src=packageList .imagpath alt='canada' style='max-width:300px;')
+                .card-body
+                  //- h1.card-title= packageList .PkgName
+                  h4.card-text= packageList.PkgDesc
+                  h5.card-text
+                    | Price: #{packageList .PkgBasePrice}
+
+    // Buy Package form
+    form.row.g-3(method='POST' action="/checkout")
+      .col-md-6(hidden=true)
+        label.form-label(for='inputpid') PackageID
+        input#inputpid.form-control(type='number' name='packid' value= packageList.PackageId required)
+      .col-md-6.p-3
+        label.form-label(for='inputdest') Destination
+        input#inputdest.form-control(type='string' name='dest' )
+      .col-md-6.p-3
+        label.form-label(for='inputclass') Class
+        input#inputclass.form-control(type='string' name='class' value='ECN')
+      .col-md-6.p-3
+        label.form-label(for='inputstartdt') Trip Start Date
+        input#inputstartdt.form-control(type='date' name='startdate' required min=curdt onchange='var input = document.getElementById("inputenddt");input.setAttribute("min", this.value);input.setAttribute("value", this.value);')
+        i.fas.fa-calendar.input-prefix(tabindex='0')
+      .col-md-6.p-3
+        label.form-label(for='inputenddt') Trip End Date
+        input#inputenddt.form-control(type='date' name='enddate' required min=curdt)
+        i.fas.fa-calendar.input-prefix(tabindex='0')
+      .col-md-6.p-3(hidden=true)
+        label.form-label(for='inputcid') CustID
+        input#inputcid.form-control(type='number' name='custid' min='100' max='999' required value=cid)
+      .col-md-6.p-3
+        label.form-label(for='inputnumtrav') No. of Travelers
+        input#inputnumtrav.form-control(type='number' name='numTraveler' min='1' max='999' value='1' required)
+      .col-md-6(hidden=true)
+        label.form-label(for='inputtriptype') Trip Type
+        input#inputtriptype.form-control(type='string' name='triptype' value='L' required)
+      .col-md-6(hidden=true)
+        label.form-label(for='inputdesc') Description
+        input#inputdesc.form-control(type='string' name='desc' value=packageList.PkgDesc required)
+      .col-md-6(hidden=true)
+        label.form-label(for='inputprice') Base Price
+        input#inputprice.form-control(type='number' name='price' value=packageList.PkgBasePrice required)
+      .col-md-6(hidden=true)
+        label.form-label(for='inputcomm') Agency Commission
+        input#inputcomm.form-control(type='number' name='comm' value=packageList.PkgAgencyCommission required)
+      .col-md-12.p-3
+        button.btn.btn-primary(type='submit') Checkout
+                    
+                      
+
